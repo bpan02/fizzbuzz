@@ -1,4 +1,3 @@
-
 class FizzBuzz
   def get_string(input)
     result = ''
