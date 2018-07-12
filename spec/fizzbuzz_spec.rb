@@ -1,40 +1,49 @@
+require_relative '../lib/fizz_buzz'
 
-require 'fizz_buzz'
+describe FizzBuzz do
+  describe '.get_string' do
+    subject (:fizzbuzz) { FizzBuzz.new }
 
-describe Fizzbuzz do
- describe ".GetString" do
-   subject (:fizzbuzz) { Fizzbuzz.new }
+    context "given a '1'" do
+      it 'returns 1' do
+        expect(fizzbuzz.get_string(1)).to eql('1')
+      end
+    end
 
-   context "given a '1'" do
-     it "returns 1" do
-       expect(fizzbuzz.GetString(1)).to eql("1")
-     end
-   end
+    context "given a '5'" do
+      it 'returns Fizz' do
+        expect(fizzbuzz.get_string(5)).to eql('FizzFizz')
+      end
+    end
 
-   context "given a '3'" do
-     it "returns 1" do
-       expect(fizzbuzz.GetString(3)).to eql("fizz")
-     end
-   end
+    context "given a '2'" do
+      it 'returns 2' do
+        expect(fizzbuzz.get_string(2)).to eql('2')
+      end
+    end
 
-   context "given a '2'" do
-     it "returns 1" do
-       expect(fizzbuzz.GetString(2)).to eql("2")
-     end
-   end
+    context "given a '46'" do
+      it 'returns 46' do
+        expect(fizzbuzz.get_string(46)).to eql('46')
+      end
+    end
 
-   context "given a '6'" do
-     it "returns 1" do
-       expect(fizzbuzz.GetString(6)).to eql("fizz")
-     end
-   end
+    context "given a '47'" do
+      it 'returns Buzz' do
+        expect(fizzbuzz.get_string(47)).to eql('Buzz')
+      end
+    end
 
-   context "given a '5'" do
-     it "returns 1" do
-       expect(fizzbuzz.GetString(5)).to eql("buzz")
-     end
-   end
+    context "given a '49'" do
+      it 'returns BuzzBuzz' do
+        expect(fizzbuzz.get_string(49)).to eql('BuzzBuzz')
+      end
+    end
 
- end
-
+    context "given a '50'" do
+      it 'returns FizzFizzFizz' do
+        expect(fizzbuzz.get_string(50)).to eql('FizzFizzFizz')
+      end
+    end
+  end
 end
