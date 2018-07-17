@@ -46,4 +46,13 @@ describe FizzBuzz do
       end
     end
   end
+
+  describe '.prints' do
+    subject (:fizzbuzz) { FizzBuzz.new }
+    context "given range '46..50'" do
+      it 'returns 46 Buzz BuzzBuzz FizzFizzFizz' do
+        expect { fizzbuzz.prints(46..50) }.to output("46 Buzz 48 BuzzBuzz FizzFizzFizz \n").to_stdout
+      end
+    end
+  end
 end

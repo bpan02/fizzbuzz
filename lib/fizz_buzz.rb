@@ -1,46 +1,79 @@
-
 class FizzBuzz
-  def prints(start_range)
-    end_range = start_range + 50
-    if (start_range < 1 || end_range < 1)
-      raise ArgumentError.new('start must be equal or greater than 1')
-    end
-    if (start_range > end_range)
-      raise ArgumentError.new('end_range must be equal or greater than start_range')
-    end
+  def get_string(integer)
+    rule1 = DivisibleRule.new('Fizz', 5)
+    rule2 = ContainsRule.new('Fizz', '5')
+    result = rule1.get_string(integer) + rule2.get_string(integer)
 
-    start_range.upto(end_range) {|i| puts get_string(i)}
-  end
-
-  def get_string(input)
-    result = ''
-    dup = input.dup
-    while input % 5 == 0 do
-      result += 'Fizz'
-      input = input/5
-    end
-    dup.to_s.each_char do |char|
-      if char.include?('5')
-        result += 'Fizz'
-      end
-    end
-    input = dup
-    while input % 7 == 0 do
+    dup = integer.dup
+    while dup % 7 == 0 do
       result += 'Buzz'
-      input = input/7
+      dup = dup/7
     end
-    dup.to_s.each_char do |char|
+    integer.to_s.each_char do |char|
       if char.include?('7')
         result += 'Buzz'
       end
     end
+
     if result.empty?
-      input.to_s
+      integer.to_s
     else
       result
     end
   end
+
+
+  def prints(range)
+    result = ''
+    range.each do |i|
+      result += get_string(i) + ' '
+    end
+    puts result
+  end
 end
 
-start = ARGV[0].to_i
-FizzBuzz.new.prints(start)
+class DivisibleRule
+  def initialize(output_text, divisor)
+    @text = output_text
+    @divisor = divisor
+    @matched_count = 0
+  end
+
+  def get_string(integer)
+    result = ''
+    while divisible_by?(integer, @divisor) do
+      result += @text
+      integer = integer/@divisor
+    end
+    result
+  end
+
+  private
+  def divisible_by?(integer, divisor)
+    integer % divisor == 0
+  end
+end
+
+class ContainsRule
+  def initialize(output_text, substring)
+    @text = output_text
+    @substring = substring
+  end
+
+  def get_string(integer)
+    result = ''
+    integer.to_s.each_char do |char|
+      if char.include?(@substring)
+        result += @text
+      end
+    end
+    result
+  end
+end
+
+
+
+
+
+
+
