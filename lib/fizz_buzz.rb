@@ -2,18 +2,14 @@ class FizzBuzz
   def get_string(integer)
     rule1 = DivisibleRule.new('Fizz', 5)
     rule2 = ContainsRule.new('Fizz', '5')
-    result = rule1.get_string(integer) + rule2.get_string(integer)
 
-    dup = integer.dup
-    while dup % 7 == 0 do
-      result += 'Buzz'
-      dup = dup/7
-    end
-    integer.to_s.each_char do |char|
-      if char.include?('7')
-        result += 'Buzz'
-      end
-    end
+    rule3 = DivisibleRule.new('Buzz', 7)
+    rule4 = ContainsRule.new('Buzz', '7')
+
+    result = rule1.get_string(integer) +
+      rule2.get_string(integer) +
+      rule3.get_string(integer) +
+      rule4.get_string(integer)
 
     if result.empty?
       integer.to_s
@@ -21,6 +17,8 @@ class FizzBuzz
       result
     end
   end
+end
+
 
 
   def prints(range)
