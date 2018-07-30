@@ -5,11 +5,7 @@ class FizzBuzz
     result = divisible_by(input, 5, 'Fizz', result)
     result = divisible_by(input,7,'Buzz', result)
 
-    input.to_s.each_char do |char|
-      if char.include?('5')
-        result += 'Fizz'
-      end
-    end
+    result = contains(input, result)
 
     input.to_s.each_char do |char|
       if char.include?('7')
@@ -22,6 +18,15 @@ class FizzBuzz
     else
       result
     end
+  end
+
+  def contains(input, result)
+    input.to_s.each_char do |char|
+      if char.include?('5')
+        result += 'Fizz'
+      end
+    end
+    result
   end
 
   def divisible_by(input, divisor, output, result)
