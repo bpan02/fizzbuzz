@@ -5,13 +5,8 @@ class FizzBuzz
     result = divisible_by(input, 5, 'Fizz', result)
     result = divisible_by(input,7,'Buzz', result)
 
-    result = contains(input, result)
-
-    input.to_s.each_char do |char|
-      if char.include?('7')
-        result += 'Buzz'
-      end
-    end
+    result = contains(input, 5, 'Fizz', result)
+    result = contains(input, 7, 'Buzz', result)
 
     if result.empty?
       input.to_s
@@ -20,10 +15,10 @@ class FizzBuzz
     end
   end
 
-  def contains(input, result)
+  def contains(input, target, output, result)
     input.to_s.each_char do |char|
-      if char.include?('5')
-        result += 'Fizz'
+      if char.include?(target.to_s)
+        result += output
       end
     end
     result
