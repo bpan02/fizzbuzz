@@ -1,13 +1,17 @@
+require_relative 'divisible_rule.rb'
+require_relative 'contains_rule.rb'
+
 class FizzBuzz
-  def fizz_buzzify(input)
+  def stringify(input)
     rule1 = DivisibleRule.new('Fizz',5)
     rule2 = DivisibleRule.new('Buzz',7)
+    rule3 = ContainsRule.new('Fizz','5')
+    rule4 = ContainsRule.new('Buzz','7')
 
     result = rule1.stringify(input) +
-      rule2.stringify(input)
-    
-    result = contains(input, 5, 'Fizz', result)
-    result = contains(input, 7, 'Buzz', result)
+      rule2.stringify(input) +
+      rule3.stringify(input) +
+      rule4.stringify(input)
 
     if result.empty?
       input.to_s
@@ -16,50 +20,10 @@ class FizzBuzz
     end
   end
 
-
-  class DivisibleRule
-    def initialize(output, divisor)
-      @output = output
-      @divisor = divisor
-    end
-
-    def stringify(integer)
-      result = ''
-      while divisible_by?(integer, @divisor) do
-        result += @output
-        integer = integer/@divisor
-      end
-      result
-    end
-
-    private
-    def divisible_by?(integer, divisor)
-      integer % divisor == 0
-    end
-  end
-
-  def contains(input, target, output, result)
-    input.to_s.each_char do |char|
-      if char.include?(target.to_s)
-        result += output
-      end
-    end
-    result
-  end
-
-  def divisible_by(input, divisor, output, result)
-    dup = input.dup
-    while dup % divisor == 0 do
-      result += output
-      dup    = dup/divisor
-    end
-    result
-  end
-
   def prints(range)
     result = ''
     range.each do |i|
-      result += fizz_buzzify(i) + ' '
+      result += stringify(i) + ' '
     end
     puts result
   end
