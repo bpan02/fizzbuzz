@@ -1,10 +1,11 @@
 class FizzBuzz
   def fizz_buzzify(input)
-    result = ''
+    rule1 = DivisibleRule.new('Fizz',5)
+    rule2 = DivisibleRule.new('Buzz',7)
 
-    result = divisible_by(input, 5, 'Fizz', result)
-    result = divisible_by(input,7,'Buzz', result)
-
+    result = rule1.stringify(input) +
+      rule2.stringify(input)
+    
     result = contains(input, 5, 'Fizz', result)
     result = contains(input, 7, 'Buzz', result)
 
@@ -12,6 +13,28 @@ class FizzBuzz
       input.to_s
     else
       result
+    end
+  end
+
+
+  class DivisibleRule
+    def initialize(output, divisor)
+      @output = output
+      @divisor = divisor
+    end
+
+    def stringify(integer)
+      result = ''
+      while divisible_by?(integer, @divisor) do
+        result += @output
+        integer = integer/@divisor
+      end
+      result
+    end
+
+    private
+    def divisible_by?(integer, divisor)
+      integer % divisor == 0
     end
   end
 
