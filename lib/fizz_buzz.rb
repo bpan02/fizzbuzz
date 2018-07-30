@@ -3,12 +3,7 @@ class FizzBuzz
     result = ''
 
     result = divisible_by(input, 5, 'Fizz', result)
-
-    dup = input.dup
-    while dup % 7 == 0 do
-      result += 'Buzz'
-      dup = dup/7
-    end
+    result = divisible_by(input,7,'Buzz', result)
 
     input.to_s.each_char do |char|
       if char.include?('5')
@@ -33,7 +28,7 @@ class FizzBuzz
     dup = input.dup
     while dup % divisor == 0 do
       result += output
-      dup    = dup/5
+      dup    = dup/divisor
     end
     result
   end
